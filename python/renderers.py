@@ -34,5 +34,5 @@ with Vpip() as p:
         p.goHome()
     except:
         exc_type, exc_value, exc_traceback = sys.exc_info()
-        print("test1 main thread exception : %s" % exc_type)
+        print("test3 main thread exception : %s" % exc_type)
         traceback.print_tb(exc_traceback, limit=2, file=sys.stdout)

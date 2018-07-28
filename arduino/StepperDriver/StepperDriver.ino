@@ -6,20 +6,61 @@
 // comment out to disable PENUP support
 #define ENABLE_PENUP
 
+// For RAMPS 1.4
+#define X_STEP_PIN         A0
+#define X_DIR_PIN          A1
+#define X_ENABLE_PIN       38
+#define X_MIN_PIN           3
+#define X_MAX_PIN           2
+
+#define Y_STEP_PIN         A6
+#define Y_DIR_PIN          A7
+#define Y_ENABLE_PIN       A2
+#define Y_MIN_PIN          14
+#define Y_MAX_PIN          15
+
+#define Z_STEP_PIN         46
+#define Z_DIR_PIN          48
+#define Z_ENABLE_PIN       A8
+#define Z_MIN_PIN          18
+#define Z_MAX_PIN          19
+
+#define E_STEP_PIN         26
+#define E_DIR_PIN          28
+#define E_ENABLE_PIN       24
+
+#define SDPOWER            -1
+#define SDSS               53
+#define LED_PIN            13
+
+#define SERVO1             11
+
+#define FAN_PIN            9
+
+#define PS_ON_PIN          12
+#define KILL_PIN           -1
+
+#define HEATER_0_PIN       10
+#define HEATER_1_PIN       8
+#define TEMP_0_PIN         A13
+#define TEMP_1_PIN         A14
+#define TEMP_2_PIN         A15
+
 // Constants and global variables
 // --------------------------------------
-const int LED_PINS_COUNT = 4;
+const int LED_PINS_COUNT = 1;
 const int LED_PINS[LED_PINS_COUNT] = {
-  10,11,12,13}; // the pins of all of the leds, first 3 are status lights, 4th is receive indicator
-#define MOTOR_ENABLE_PIN 9
-const int LEFT_STEP_PIN = 3;
-const int LEFT_DIR_PIN = 2;
-const int RIGHT_STEP_PIN = 5;
-const int RIGHT_DIR_PIN = 4;
+  LED_PIN}; // the pins of all of the leds, first 3 are status lights, 4th is receive indicator
+const int LEFT_ENABLE_PIN = Y_ENABLE_PIN;
+const int LEFT_STEP_PIN = Y_STEP_PIN;
+const int LEFT_DIR_PIN = Y_DIR_PIN;
+const int RIGHT_ENABLE_PIN = Z_ENABLE_PIN;
+const int RIGHT_STEP_PIN = Z_STEP_PIN;
+const int RIGHT_DIR_PIN = Z_DIR_PIN;
 //Set micro stepping pins here
-#define M0_PIN 8
-#define M1_PIN 7
-#define M2_PIN 6
+//#define M0_PIN 8
+//#define M1_PIN 7
+//#define M2_PIN 6
 
 //Set the micro stepping level here (Defaulting to 1/16th as that doesn't require modification to Processing Control app source to support 1/32nd)
 //DRV8825 Microstepping configuration
@@ -33,9 +74,9 @@ const int RIGHT_DIR_PIN = 4;
 // 1   0   1   32 microsteps/step
 // 0   1   1   32 microsteps/step
 // 1   1   1   32 microsteps/step
-#define M0_STEP HIGH
-#define M1_STEP HIGH
-#define M2_STEP LOW
+//#define M0_STEP HIGH
+//#define M1_STEP HIGH
+//#define M2_STEP LOW
 
 
 #ifdef ENABLE_PENUP
@@ -85,19 +126,21 @@ void setup() {
     digitalWrite(LED_PINS[ledIndex], HIGH);
   }
 
-  pinMode(M0_PIN, OUTPUT);
-  pinMode(M1_PIN, OUTPUT);
-  pinMode(M2_PIN, OUTPUT);
-  digitalWrite(M0_PIN, M0_STEP);
-  digitalWrite(M1_PIN, M1_STEP);
-  digitalWrite(M2_PIN, M2_STEP);
+//  pinMode(M0_PIN, OUTPUT);
+//  pinMode(M1_PIN, OUTPUT);
+//  pinMode(M2_PIN, OUTPUT);
+//  digitalWrite(M0_PIN, M0_STEP);
+//  digitalWrite(M1_PIN, M1_STEP);
+//  digitalWrite(M2_PIN, M2_STEP);
     
   pinMode(LEFT_STEP_PIN, OUTPUT);
   pinMode(LEFT_DIR_PIN, OUTPUT);
   pinMode(RIGHT_STEP_PIN, OUTPUT);
   pinMode(RIGHT_DIR_PIN, OUTPUT);	
-  pinMode(MOTOR_ENABLE_PIN, OUTPUT);
-  digitalWrite(MOTOR_ENABLE_PIN, LOW);
+  pinMode(LEFT_ENABLE_PIN, OUTPUT);
+  pinMode(RIGHT_ENABLE_PIN, OUTPUT);
+  digitalWrite(LEFT_ENABLE_PIN, LOW);
+  digitalWrite(RIGHT_ENABLE_PIN, LOW);
 #ifdef ENABLE_PENUP
   penUpServo.attach(PENUP_SERVO_PIN);
   penUpServo.write(PENUP_ANGLE);
@@ -248,15 +291,15 @@ void UpdatePenTransition(long curSliceTime) {
 // --------------------------------------
 void UpdateStatusLeds(int value) {
   // output the time to the leds in binary
-  digitalWrite(LED_PINS[0], value & 0x1);
-  digitalWrite(LED_PINS[1], value & 0x2);
-  digitalWrite(LED_PINS[2], value & 0x4);
+//  digitalWrite(LED_PINS[0], value & 0x1);
+//  digitalWrite(LED_PINS[1], value & 0x2);
+//  digitalWrite(LED_PINS[2], value & 0x4);
 }
 
 // Update receive leds
 // --------------------------------------
 void UpdateReceiveLed(boolean value) {
-  digitalWrite(LED_PINS[3], value);
+  digitalWrite(LED_PINS[0], value);
 }
 
 // Step

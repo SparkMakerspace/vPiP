@@ -17,11 +17,11 @@ from vPiP import *
 from vPiP.renderers.norwegianSpiral import renderNorwegianSpiral
 Vpip = vPiP.Vpip
 
-# filename = "../testImages/Vulcan.jpg"
+filename = "/home/jjfs85/git/vPiP/testImages/HamptonCourt.jpg"
 #filename = "../testImages/TyneBridge.jpg"
 #filename = "../testImages/SydneyOpera.jpg"
 #filename = "../testImages/SydneyOperaNight.jpg"
-filename = "../testImages/HamptonCourt.jpg"
+#filename = "../testImages/HamptonCourt.jpg"
 with Vpip() as p:
 #    p.setShowDrawing(True)
 #    p.setPlotting(False)
@@ -33,5 +33,5 @@ with Vpip() as p:
         p.goHome()
     except:
         exc_type, exc_value, exc_traceback = sys.exc_info()
-        print("test1 main thread exception : %s" % exc_type)
+        print("test3 main thread exception : %s" % exc_type)
         traceback.print_tb(exc_traceback, limit=2, file=sys.stdout)
