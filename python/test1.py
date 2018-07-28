@@ -19,7 +19,7 @@ Vpip = vPiP.Vpip
 
 with Vpip() as p:
     p.setShowDrawing(True)
-    p.setPlotting(False)
+    p.setPlotting(True)
     try:
         p.moveTo(0, 0)
         p.drawTo(p.config.pixels, 0)
