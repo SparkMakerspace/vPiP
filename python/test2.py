@@ -20,7 +20,7 @@ Vpip = vPiP.Vpip
 
 with Vpip() as p:
 #    p.setShowDrawing(True)
-#    p.setPlotting(False)
+    p.setPlotting(True)
     try:
         d = 100.0
         for x in range(100, 2500, 240):

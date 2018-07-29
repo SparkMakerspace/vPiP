@@ -17,7 +17,7 @@ from vPiP import *
 from vPiP.renderers.norwegianSpiral import renderNorwegianSpiral
 Vpip = vPiP.Vpip
 
-filename = "/home/jjfs85/git/vPiP/testImages/HamptonCourt.jpg"
+filename = "/home/pi/vPiP/testImages/HamptonCourt.jpg"
 #filename = "../testImages/TyneBridge.jpg"
 #filename = "../testImages/SydneyOpera.jpg"
 #filename = "../testImages/SydneyOperaNight.jpg"

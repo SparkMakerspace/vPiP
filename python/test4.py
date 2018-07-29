@@ -17,7 +17,7 @@ from vPiP.vPiP import Vpip, ConstrainDrawingRectangle
 from vPiP.renderers.svg import renderSVG
 
 
-filename = "../testImages/Vulcan.svg"
+filename = "/home/pi/vPiP/testImages/Vulcan.svg"
 
 with Vpip() as p:
 #    p.setShowDrawing(True)
