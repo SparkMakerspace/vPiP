@@ -14,20 +14,21 @@
 import sys
 import traceback
 from vPiP.vPiP import Vpip, ConstrainDrawingRectangle
-from vPiP.renderers.svg import renderSVG
+from vPiP.renderers.spiralArcRenderer import renderSpiralArc
 
 
-filename = "/home/pi/vPiP/testImages/Vulcan.svg"
+filename = "/home/pi/cam.jpg"
 
 with Vpip() as p:
 #    p.setShowDrawing(True)
-#    p.setPlotting(False)
+#    p.setPlotting(True)
     try:
-        renderSVG(filename, 300, 200, 600, p)
-        renderSVG(filename, 200, 1000, 800, p)
-        renderSVG(filename, 0, 1950, 1200, p)
-        d = ConstrainDrawingRectangle(1200, 0, 5000, p.height, p)
-        renderSVG(filename, 1200, 0, 3800, d, True)
+        renderSpiralArc(filename, 600, 40, 80, 2, p)
+#	renderSpiralArc(filename, 300, 50, 40, 10, p)
+#        renderSVG(filename, 200, 1000, 800, p)
+#        renderSVG(filename, 0, 1950, 1200, p)
+#        d = ConstrainDrawingRectangle(1200, 0, 5000, p.height, p)
+#        renderSVG(filename, 1200, 0, 3800, d, True)
         p.goHome()
     except:
         exc_type, exc_value, exc_traceback = sys.exc_info()

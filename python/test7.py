@@ -24,9 +24,9 @@ filename = "/home/pi/vPiP/testImages/HamptonCourt.jpg"
 #filename = "../testImages/HamptonCourt.jpg"
 with Vpip() as p:
 #    p.setShowDrawing(True)
-#    p.setPlotting(False)
+    p.setPlotting(True)
     try:
-        p.moveTo(250,250)
+        p.drawTo(250,250)
         p.goHome()
     except:
         exc_type, exc_value, exc_traceback = sys.exc_info()

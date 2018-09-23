@@ -15,23 +15,43 @@ import sys
 import traceback
 from vPiP import *
 from vPiP.renderers.spiralArcRenderer import renderSpiralArc
+import time
+import math
+from subprocess import *
+
 Vpip = vPiP.Vpip
 
-filename = "../testImages/Vulcan.jpg"
-# filename = "../testImages/TyneBridge.jpg"
-# filename = "../testImages/SydneyOpera.jpg"
-# filename = "../testImages/SydneyOperaNight.jpg"
-# filename = "../testImages/HamptonCourt.jpg"
-with Vpip() as p:
-#    p.setShowDrawing(True)
-#    p.setPlotting(False)
-    try:
-        renderSpiralArc(filename, 300, 200, 600, 10, p)
-        renderSpiralArc(filename, 200, 1000, 800, 15, p)
-        renderSpiralArc(filename, 0, 1950, 1200, 20, p)
-        renderSpiralArc(filename, 1250, 50, 3700, 25, p)
-        p.goHome()
-    except:
+width = 200
+height = width/4*3
+numwide = int(math.floor(1000.0/width))
+numhigh = int(math.floor(1000.0/height))
+
+for x in range(1,numwide,1):
+  for y in range(numhigh):
+    if x <= 1 and y <= 1:
+      continue
+    call(["bash", "get-new-image.sh"])
+    filename = check_output(["bash","get-latest.sh"])
+    filename = filename.decode('utf-8').strip()
+#    print filename
+    filename = "/home/pi/photos/"+filename
+#    filename = "../testImages/TyneBridge.jpg"
+#    filename = "../testImages/SydneyOpera.jpg"
+#    filename = "../testImages/SydneyOperaNight.jpg"
+#    filename = "../testImages/HamptonCourt.jpg"
+    with Vpip() as p:
+#      p.setShowDrawing(True)
+#      p.setPlotting(False)
+      try:
+#        p.moveTo(0,0)
+#        p.drawTo(0,0)
+        renderSpiralArc(filename, x*width, y*height, width, 4, p)
+#        renderSpiralArc(filename, 100, 160, 80, 2, p)
+#        renderSpiralArc(filename, 200, 1000, 800, 15, p)
+#        renderSpiralArc(filename, 0, 1950, 1200, 20, p)
+#        renderSpiralArc(filename, 50, 100, 500, 25, p)
+#        p.goHome()
+      except:
         exc_type, exc_value, exc_traceback = sys.exc_info()
         print("test1 main thread exception : %s" % exc_type)
         traceback.print_tb(exc_traceback, limit=2, file=sys.stdout)
